@@ -1,8 +1,9 @@
 ## GoShort
 
-GoShort is the companion command line utility tool to create short links for long URLs or for text you want to share. The service being used is my own Spi.to which I strongly suggest you to check out and give me feedback.
+GoShort is the companion command line utility tool to create short links for long URLs or for text you want to share. The service being used is my own **Spi.to** which I strongly suggest you to check out and give me feedback.
 Visit Spi.to at [http://spi.to](http://spi.to "Spi.to online service")
-**Spi.to** supports expiring links, therefore this tool also allows you to specify an expiration time. Specify the lifetime of your Spit link in seconds.
+
+_Spi.to_ supports expiring links, therefore this tool also allows you to specify an expiration time. Specify the lifetime of your Spit link in seconds.
 
 ### How to use
 
@@ -21,10 +22,10 @@ To use `GoShort`:
   go run goshort.go -l http://mylongurl.com -exp XXX
   ```
 
-  OR, you can install it in your $PATH with the following
+  OR, you can install it in your $PATH with the following command (you need GOBIN and GOROOT env variables to be set)
 
   ```
-  go install goshort.go // GOBIN and GOROOT env variables required
+  go install goshort.go
   ```
   
   and then call it with the following command
@@ -43,4 +44,4 @@ The lifespan of the Spit link can be specified with the `-exp` flag (measured in
 
 ## Copyright
 
-Copyright (c) 2015 _Lambros Petrou_. See LICENSE.txt for further details.
+Copyright (c) 2015 _Lambros Petrou_. See LICENSE for further details.
