@@ -28,7 +28,6 @@ func Spitit(longUrl string, exp string, multipart bool) (string, error) {
 // exp should be the expiry time in seconds - string format
 // This function uses multipart FormData Content-Type
 func ShortenMultipart(longUrl string, exp string) (string, error) {
-
 	client := &http.Client{}
 
 	var b bytes.Buffer
@@ -63,15 +62,14 @@ func ShortenMultipart(longUrl string, exp string) (string, error) {
 	// Don't forget to set the content type, this will contain the boundary.
 	req.Header.Set("Content-Type", w.FormDataContentType())
 	resp, err := client.Do(req)
-	//fmt.Println(resp)
-	if resp.StatusCode != 200 {
-		return "", errors.New(resp.Status)
-	}
 	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		body, _ := ioutil.ReadAll(resp.Body)
+		return "", errors.New(resp.Status + " :: " + string(body))
+	}
 	body, err := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(body))
 	if err != nil {
-		return "", err
+		return "", errors.New(err.Error() + " :: " + string(body))
 	}
 
 	var f interface{}
@@ -84,7 +82,7 @@ func ShortenMultipart(longUrl string, exp string) (string, error) {
 	return urlHash["absolute_url"].(string), nil
 }
 
-// This form does the same job with the Shorten() function but uses URLEncoded-form Content-Type
+// This method does the same job with the Shorten() function but uses URLEncoded-form Content-Type
 func ShortenURLEnc(longUrl string, exp string) (string, error) {
 
 	client := &http.Client{}

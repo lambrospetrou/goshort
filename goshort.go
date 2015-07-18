@@ -13,7 +13,7 @@ func main() {
 	var exp = flag.String("exp", "86400", "specify expiry time in seconds")
 	flag.Parse()
 
-	resp, err := spito.Spitit(*l, *exp, false)
+	resp, err := spito.Spitit(*l, *exp, true)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error while shortening with Spi.to :: \n", err.Error())
 	} else {
