@@ -15,11 +15,11 @@ To use `GoShort`:
   git clone https://github.com/lambrospetrou/goshort.git
   ```
 
-* Run it directly without installing (XXX is any positive number)
+* Run it directly without installing
 
   ```
   cd goshort
-  go run goshort.go -l http://mylongurl.com -exp XXX
+  go run goshort.go -c http://mylongurl.com 
   ```
 
   OR, you can install it in your $PATH with the following command (you need GOBIN and GOROOT env variables to be set)
@@ -31,16 +31,27 @@ To use `GoShort`:
   and then call it with the following command
 
   ```
-  goshort -l http://mylongurl.com
+  goshort -c http://mylongurl.com
   ```
 
-By default GoShort will create links that expire in 1 day so please remember to specify your preferred lifespan for the link.
+By default GoShort will create short links for URLs that expire in 1 day so please remember to specify your preferred lifespan for the link.
 
-The lifespan of the Spit link can be specified with the `-exp` flag (measured in seconds from now), as can be seen in the following command that creates a short link for the website `http://spi.to` that **never** expires.
+The lifespan of the Spit link can be specified with the `-e` flag (measured in seconds from now), as can be seen in the following command that creates a short link for the website `http://spi.to` that **never** expires.
   
   ```
-  goshort -l http://spi.to -exp 0
+  goshort -c http://spi.to -e 0
   ```
+
+### Options
+
+You have the option to create short links for plain text (or source code) apart from URLs. 
+The option `-t` defines the _type_ of the Spit you want to create. If you supply the word "text" you do not create a Spit for a URL link but for plain text.
+
+  ```
+  goshort -c "Hello world! This is not a URL link but it can still be shortened..." -t "text" -e 100
+  ```
+
+The above command creates a short link for the specified text which will expire in 100 seconds.
 
 ## Copyright
 
