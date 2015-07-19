@@ -53,6 +53,17 @@ The option `-t` defines the _type_ of the Spit you want to create. If you supply
 
 The above command creates a short link for the specified text which will expire in 100 seconds.
 
+#### Summary for Flags
+
+* `-c` - Content
+  After this flag you should put the content of your spit, either the URL link or the text.
+
+* `-e` - Expiration
+  Specify the lifespan of your link in seconds (0 stands for never expiry - live forever).
+
+* `-t` - Spit Type
+  It can be either _url_ or _text_.
+
 ## Copyright
 
 Copyright (c) 2015 _Lambros Petrou_. See LICENSE for further details.
