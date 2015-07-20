@@ -11,7 +11,8 @@ import (
 )
 
 const (
-	SPITO_API_ADD string = "http://spi.to/api/v1/spits"
+	SPITO_API_ADD  string = "http://spi.to/api/v1/spits"
+	SPITO_API_VIEW string = "http://spi.to/api/v1/spits/"
 )
 
 // delegates the shortening to the corresponding method according to the
@@ -105,4 +106,22 @@ func ShortenURLEnc(content string, spitType string, exp string) (string, error) 
 	resp, err := client.Do(req)
 	defer resp.Body.Close()
 	return _handleResponse(resp)
+}
+
+// This method does the same job with the Shorten() function but uses URLEncoded-form Content-Type
+func View(id string) (string, error) {
+	resp, err := http.Get(SPITO_API_VIEW + id)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		body, _ := ioutil.ReadAll(resp.Body)
+		return "", errors.New(resp.Status + " :: " + string(body))
+	}
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", errors.New(err.Error() + " :: " + string(body))
+	}
+	return string(body), nil
 }
