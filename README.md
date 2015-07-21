@@ -22,13 +22,13 @@ To use `GoShort`:
   go run goshort.go -c http://mylongurl.com 
   ```
 
-  OR, you can install it in your $PATH with the following command (you need GOBIN and GOROOT env variables to be set)
+  OR, you can install it in your $PATH with the following command (you need GOBIN and GOROOT env variables to be set) to be able to call it from anywhere!
 
   ```
   go install goshort.go
   ```
   
-  and then call it with the following command
+  Call it with the following command
 
   ```
   goshort -c http://mylongurl.com
