@@ -55,13 +55,20 @@ The above command creates a short link for the specified text which will expire 
 
 #### Summary for Flags
 
-* `-c` - Content
+* `-v` | View
+  This flag should be followed by the ID of the Spit you want to retrieve. For example the following command will fetch the information for the Spit with ID equal to _Kce_.
+
+  ```
+  goshort -v Kce
+  ```
+
+* `-c` | Content
   After this flag you should put the content of your spit, either the URL link or the text.
 
-* `-e` - Expiration
+* `-e` | Expiration
   Specify the lifespan of your link in seconds (0 stands for never expiry - live forever).
 
-* `-t` - Spit Type
+* `-t` | Spit Type
   It can be either _url_ or _text_.
 
 ## Copyright
