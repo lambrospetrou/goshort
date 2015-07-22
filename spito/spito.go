@@ -8,6 +8,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 const (
@@ -18,7 +19,7 @@ const (
 // delegates the shortening to the corresponding method according to the
 // 'multipart' flag which specifies if we want to do a request with a Multipart
 // content-type or a URLEncoded content-type
-func Spitit(content string, spitType string, exp string, multipart bool) (string, error) {
+func Spit(content string, spitType string, exp uint64, multipart bool) (string, error) {
 	if multipart {
 		return ShortenMultipart(content, spitType, exp)
 	} else {
@@ -48,7 +49,7 @@ func _handleResponse(resp *http.Response) (string, error) {
 
 // exp should be the expiry time in seconds - string format
 // This function uses multipart FormData Content-Type
-func ShortenMultipart(content string, spitType string, exp string) (string, error) {
+func ShortenMultipart(content string, spitType string, exp uint64) (string, error) {
 	client := &http.Client{}
 
 	var b bytes.Buffer
@@ -70,7 +71,7 @@ func ShortenMultipart(content string, spitType string, exp string) (string, erro
 	if fw, err = w.CreateFormField("exp"); err != nil {
 		return "", err
 	}
-	if _, err = fw.Write([]byte(exp)); err != nil {
+	if _, err = fw.Write([]byte(strconv.FormatUint(exp, 10))); err != nil {
 		return "", err
 	}
 
@@ -88,14 +89,14 @@ func ShortenMultipart(content string, spitType string, exp string) (string, erro
 }
 
 // This method does the same job with the Shorten() function but uses URLEncoded-form Content-Type
-func ShortenURLEnc(content string, spitType string, exp string) (string, error) {
+func ShortenURLEnc(content string, spitType string, exp uint64) (string, error) {
 
 	client := &http.Client{}
 
 	parameters := url.Values{}
 	parameters.Add("content", content)
 	parameters.Add("spit_type", spitType)
-	parameters.Add("exp", exp)
+	parameters.Add("exp", strconv.FormatUint(exp, 10))
 
 	req, err := http.NewRequest("POST", SPITO_API_ADD,
 		bytes.NewBufferString(parameters.Encode()))

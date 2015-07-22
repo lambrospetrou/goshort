@@ -10,8 +10,8 @@ import (
 func main() {
 
 	var v = flag.String("v", "", "specify the Spit ID you want to see details")
-	var l = flag.String("c", "", "specify a long URL (or text) to short-spit it")
-	var e = flag.String("e", "86400", "specify expiry time in seconds")
+	var c = flag.String("c", "", "specify a long URL (or text) to short-spit it")
+	var e = flag.Uint64("e", 86400, "specify expiry time in seconds")
 	var t = flag.String("t", "url", "specify the type of the Spit (url or text)")
 	flag.Parse()
 
@@ -23,7 +23,11 @@ func main() {
 			fmt.Fprintf(os.Stdout, "Spit-details: %s\n", resp)
 		}
 	} else {
-		resp, err := spito.Spitit(*l, *t, *e, true)
+		if len(*c) == 0 {
+			fmt.Fprintf(os.Stderr, "Cannot create empty Spit!\n")
+			return
+		}
+		resp, err := spito.Spit(*c, *t, *e, true)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Error while shortening with Spi.to :: \n", err.Error())
 		} else {
