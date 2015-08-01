@@ -109,7 +109,8 @@ func ShortenURLEnc(content string, spitType string, exp uint64) (string, error) 
 	return _handleResponse(resp)
 }
 
-// This method does the same job with the Shorten() function but uses URLEncoded-form Content-Type
+// This method handles the View requests. Given a spit ID it
+// fetches all the information for it as JSON format and displays it.
 func View(id string) (string, error) {
 	resp, err := http.Get(SPITO_API_VIEW + id)
 	if err != nil {

@@ -61,6 +61,7 @@ The above command creates a short link for the specified text which will expire 
   ```
   goshort -v Kce
   ```
+  When the flag _-v_ is used the other options are ignored.
 
 * `-c` | Content
   After this flag you should put the content of your spit, either the URL link or the text.
